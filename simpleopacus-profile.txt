@@ -1,0 +1,232 @@
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                        model_inference         0.00%       0.000us         0.00%       0.000us       0.000us     706.635ms       100.00%     706.635ms     706.635ms             1  
+                                        model_inference         0.18%       1.279ms       100.00%     710.770ms     710.770ms       0.000us         0.00%       8.000us       8.000us             1  
+                                           aten::linear         0.01%      68.000us        99.82%     709.473ms     709.473ms       0.000us         0.00%       8.000us       8.000us             1  
+                                            aten::addmm        97.46%     692.731ms        99.79%     709.317ms     709.317ms       8.000us         0.00%       8.000us       8.000us             1  
+void dot_kernel<float, 128, 0, cublasDotParams<cubla...         0.00%       0.000us         0.00%       0.000us       0.000us       3.000us         0.00%       3.000us       3.000us             1  
+void reduce_1Block_kernel<float, 128, 7, cublasGemvT...         0.00%       0.000us         0.00%       0.000us       0.000us       3.000us         0.00%       3.000us       3.000us             1  
+void at::native::elementwise_kernel<128, 2, at::nati...         0.00%       0.000us         0.00%       0.000us       0.000us       2.000us         0.00%       2.000us       2.000us             1  
+                                                aten::t         0.01%      68.000us         0.01%      88.000us      88.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                        aten::transpose         0.00%      18.000us         0.00%      20.000us      20.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                       aten::as_strided         0.00%       4.000us         0.00%       4.000us       2.000us       0.000us         0.00%       0.000us       0.000us             2  
+                                           aten::expand         0.00%      10.000us         0.00%      12.000us      12.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                       cudaLaunchKernel         0.01%      60.000us         0.01%      60.000us      20.000us       0.000us         0.00%       0.000us       0.000us             3  
+                                               cudaFree         2.26%      16.065ms         2.26%      16.065ms       8.033ms       0.000us         0.00%       0.000us       0.000us             2  
+                                 cudaDeviceGetAttribute         0.00%       1.000us         0.00%       1.000us       0.067us       0.000us         0.00%       0.000us       0.000us            15  
+                                   cudaGetSymbolAddress         0.00%       0.000us         0.00%       0.000us       0.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                             cudaMalloc         0.06%     433.000us         0.06%     433.000us     108.250us       0.000us         0.00%       0.000us       0.000us             4  
+                                  cudaStreamIsCapturing         0.00%       7.000us         0.00%       7.000us       7.000us       0.000us         0.00%       0.000us       0.000us             1  
+cudaOccupancyMaxActiveBlocksPerMultiprocessorWithFla...         0.00%       8.000us         0.00%       8.000us       8.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                           aten::detach         0.00%       6.000us         0.00%      18.000us      18.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                                 detach         0.00%      12.000us         0.00%      12.000us      12.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                  cudaDeviceSynchronize         0.00%       7.000us         0.00%       7.000us       7.000us       0.000us         0.00%       0.000us       0.000us             1  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 710.777ms
+Self CUDA time total: 706.643ms
+
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                        model_inference         0.00%       0.000us         0.00%       0.000us       0.000us      55.000us        90.16%      55.000us      55.000us             1  
+                                        model_inference         9.07%     298.000us        99.76%       3.276ms       3.276ms       0.000us         0.00%       6.000us       6.000us             1  
+                                           aten::linear         0.24%       8.000us        90.47%       2.971ms       2.971ms       0.000us         0.00%       6.000us       6.000us             1  
+                                            aten::addmm        87.76%       2.882ms        89.13%       2.927ms       2.927ms       6.000us         9.84%       6.000us       6.000us             1  
+void at::native::elementwise_kernel<128, 2, at::nati...         0.00%       0.000us         0.00%       0.000us       0.000us       2.000us         3.28%       2.000us       2.000us             1  
+void dot_kernel<float, 128, 0, cublasDotParams<cubla...         0.00%       0.000us         0.00%       0.000us       0.000us       2.000us         3.28%       2.000us       2.000us             1  
+void reduce_1Block_kernel<float, 128, 7, cublasGemvT...         0.00%       0.000us         0.00%       0.000us       0.000us       2.000us         3.28%       2.000us       2.000us             1  
+                                                aten::t         0.73%      24.000us         1.10%      36.000us      36.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                        aten::transpose         0.30%      10.000us         0.37%      12.000us      12.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                       aten::as_strided         0.09%       3.000us         0.09%       3.000us       1.500us       0.000us         0.00%       0.000us       0.000us             2  
+                                           aten::expand         0.21%       7.000us         0.24%       8.000us       8.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                       cudaLaunchKernel         1.10%      36.000us         1.10%      36.000us      12.000us       0.000us         0.00%       0.000us       0.000us             3  
+cudaOccupancyMaxActiveBlocksPerMultiprocessorWithFla...         0.03%       1.000us         0.03%       1.000us       1.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                           aten::detach         0.12%       4.000us         0.21%       7.000us       7.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                                 detach         0.09%       3.000us         0.09%       3.000us       3.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                  cudaDeviceSynchronize         0.24%       8.000us         0.24%       8.000us       8.000us       0.000us         0.00%       0.000us       0.000us             1  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 3.284ms
+Self CUDA time total: 61.000us
+
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                        model_inference         0.00%       0.000us         0.00%       0.000us       0.000us      39.000us        88.64%      39.000us      39.000us             1  
+                                        model_inference         6.12%     164.000us        99.78%       2.672ms       2.672ms       0.000us         0.00%       5.000us       5.000us             1  
+                                           aten::linear         0.26%       7.000us        93.50%       2.504ms       2.504ms       0.000us         0.00%       5.000us       5.000us             1  
+                                            aten::addmm        91.49%       2.450ms        92.61%       2.480ms       2.480ms       5.000us        11.36%       5.000us       5.000us             1  
+void dot_kernel<float, 128, 0, cublasDotParams<cubla...         0.00%       0.000us         0.00%       0.000us       0.000us       2.000us         4.55%       2.000us       2.000us             1  
+void reduce_1Block_kernel<float, 128, 7, cublasGemvT...         0.00%       0.000us         0.00%       0.000us       0.000us       2.000us         4.55%       2.000us       2.000us             1  
+void at::native::elementwise_kernel<128, 2, at::nati...         0.00%       0.000us         0.00%       0.000us       0.000us       1.000us         2.27%       1.000us       1.000us             1  
+                                                aten::t         0.37%      10.000us         0.63%      17.000us      17.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                        aten::transpose         0.22%       6.000us         0.26%       7.000us       7.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                       aten::as_strided         0.07%       2.000us         0.07%       2.000us       1.000us       0.000us         0.00%       0.000us       0.000us             2  
+                                           aten::expand         0.11%       3.000us         0.15%       4.000us       4.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                       cudaLaunchKernel         0.93%      25.000us         0.93%      25.000us       8.333us       0.000us         0.00%       0.000us       0.000us             3  
+cudaOccupancyMaxActiveBlocksPerMultiprocessorWithFla...         0.04%       1.000us         0.04%       1.000us       1.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                           aten::detach         0.07%       2.000us         0.15%       4.000us       4.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                                 detach         0.07%       2.000us         0.07%       2.000us       2.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                  cudaDeviceSynchronize         0.22%       6.000us         0.22%       6.000us       6.000us       0.000us         0.00%       0.000us       0.000us             1  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 2.678ms
+Self CUDA time total: 44.000us
+
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                        model_inference         0.00%       0.000us         0.00%       0.000us       0.000us      33.000us        86.84%      33.000us      33.000us             1  
+                                        model_inference         4.70%     153.000us        99.85%       3.248ms       3.248ms       0.000us         0.00%       5.000us       5.000us             1  
+                                           aten::linear         0.15%       5.000us        95.02%       3.091ms       3.091ms       0.000us         0.00%       5.000us       5.000us             1  
+                                            aten::addmm        77.07%       2.507ms        94.41%       3.071ms       3.071ms       5.000us        13.16%       5.000us       5.000us             1  
+void dot_kernel<float, 128, 0, cublasDotParams<cubla...         0.00%       0.000us         0.00%       0.000us       0.000us       2.000us         5.26%       2.000us       2.000us             1  
+void reduce_1Block_kernel<float, 128, 7, cublasGemvT...         0.00%       0.000us         0.00%       0.000us       0.000us       2.000us         5.26%       2.000us       2.000us             1  
+void at::native::elementwise_kernel<128, 2, at::nati...         0.00%       0.000us         0.00%       0.000us       0.000us       1.000us         2.63%       1.000us       1.000us             1  
+                                                aten::t         0.28%       9.000us         0.46%      15.000us      15.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                        aten::transpose         0.15%       5.000us         0.18%       6.000us       6.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                       aten::as_strided         0.06%       2.000us         0.06%       2.000us       1.000us       0.000us         0.00%       0.000us       0.000us             2  
+                                           aten::expand         0.12%       4.000us         0.15%       5.000us       5.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                       cudaLaunchKernel        17.18%     559.000us        17.18%     559.000us     186.333us       0.000us         0.00%       0.000us       0.000us             3  
+                                           aten::detach         0.06%       2.000us         0.12%       4.000us       4.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                                 detach         0.06%       2.000us         0.06%       2.000us       2.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                  cudaDeviceSynchronize         0.15%       5.000us         0.15%       5.000us       5.000us       0.000us         0.00%       0.000us       0.000us             1  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 3.253ms
+Self CUDA time total: 38.000us
+
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                        model_inference         0.00%       0.000us         0.00%       0.000us       0.000us      32.000us        86.49%      32.000us      32.000us             1  
+                                        model_inference         5.28%     134.000us        99.80%       2.532ms       2.532ms       0.000us         0.00%       5.000us       5.000us             1  
+                                           aten::linear         0.20%       5.000us        94.36%       2.394ms       2.394ms       0.000us         0.00%       5.000us       5.000us             1  
+                                            aten::addmm        82.93%       2.104ms        93.30%       2.367ms       2.367ms       5.000us        13.51%       5.000us       5.000us             1  
+void dot_kernel<float, 128, 0, cublasDotParams<cubla...         0.00%       0.000us         0.00%       0.000us       0.000us       2.000us         5.41%       2.000us       2.000us             1  
+void reduce_1Block_kernel<float, 128, 7, cublasGemvT...         0.00%       0.000us         0.00%       0.000us       0.000us       2.000us         5.41%       2.000us       2.000us             1  
+void at::native::elementwise_kernel<128, 2, at::nati...         0.00%       0.000us         0.00%       0.000us       0.000us       1.000us         2.70%       1.000us       1.000us             1  
+                                                aten::t         0.63%      16.000us         0.87%      22.000us      22.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                        aten::transpose         0.20%       5.000us         0.24%       6.000us       6.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                       aten::as_strided         0.08%       2.000us         0.08%       2.000us       1.000us       0.000us         0.00%       0.000us       0.000us             2  
+                                           aten::expand         0.08%       2.000us         0.12%       3.000us       3.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                       cudaLaunchKernel        10.25%     260.000us        10.25%     260.000us      86.667us       0.000us         0.00%       0.000us       0.000us             3  
+                                           aten::detach         0.08%       2.000us         0.16%       4.000us       4.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                                 detach         0.08%       2.000us         0.08%       2.000us       2.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                  cudaDeviceSynchronize         0.20%       5.000us         0.20%       5.000us       5.000us       0.000us         0.00%       0.000us       0.000us             1  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 2.537ms
+Self CUDA time total: 37.000us
+
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                        model_inference         0.00%       0.000us         0.00%       0.000us       0.000us      40.000us        88.89%      40.000us      40.000us             1  
+                                        model_inference         5.45%     157.000us        99.83%       2.876ms       2.876ms       0.000us         0.00%       5.000us       5.000us             1  
+                                           aten::linear         0.21%       6.000us        94.24%       2.715ms       2.715ms       0.000us         0.00%       5.000us       5.000us             1  
+                                            aten::addmm        84.24%       2.427ms        93.54%       2.695ms       2.695ms       5.000us        11.11%       5.000us       5.000us             1  
+void dot_kernel<float, 128, 0, cublasDotParams<cubla...         0.00%       0.000us         0.00%       0.000us       0.000us       2.000us         4.44%       2.000us       2.000us             1  
+void reduce_1Block_kernel<float, 128, 7, cublasGemvT...         0.00%       0.000us         0.00%       0.000us       0.000us       2.000us         4.44%       2.000us       2.000us             1  
+void at::native::elementwise_kernel<128, 2, at::nati...         0.00%       0.000us         0.00%       0.000us       0.000us       1.000us         2.22%       1.000us       1.000us             1  
+                                                aten::t         0.31%       9.000us         0.49%      14.000us      14.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                        aten::transpose         0.14%       4.000us         0.17%       5.000us       5.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                       aten::as_strided         0.07%       2.000us         0.07%       2.000us       1.000us       0.000us         0.00%       0.000us       0.000us             2  
+                                           aten::expand         0.07%       2.000us         0.10%       3.000us       3.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                       cudaLaunchKernel         9.16%     264.000us         9.16%     264.000us      88.000us       0.000us         0.00%       0.000us       0.000us             3  
+cudaOccupancyMaxActiveBlocksPerMultiprocessorWithFla...         0.03%       1.000us         0.03%       1.000us       1.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                           aten::detach         0.07%       2.000us         0.14%       4.000us       4.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                                 detach         0.07%       2.000us         0.07%       2.000us       2.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                  cudaDeviceSynchronize         0.17%       5.000us         0.17%       5.000us       5.000us       0.000us         0.00%       0.000us       0.000us             1  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 2.881ms
+Self CUDA time total: 45.000us
+
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                        model_inference         0.00%       0.000us         0.00%       0.000us       0.000us      38.000us        88.37%      38.000us      38.000us             1  
+                                        model_inference         5.61%     165.000us        99.83%       2.938ms       2.938ms       0.000us         0.00%       5.000us       5.000us             1  
+                                           aten::linear         0.17%       5.000us        94.09%       2.769ms       2.769ms       0.000us         0.00%       5.000us       5.000us             1  
+                                            aten::addmm        84.40%       2.484ms        93.41%       2.749ms       2.749ms       5.000us        11.63%       5.000us       5.000us             1  
+void dot_kernel<float, 128, 0, cublasDotParams<cubla...         0.00%       0.000us         0.00%       0.000us       0.000us       2.000us         4.65%       2.000us       2.000us             1  
+void reduce_1Block_kernel<float, 128, 7, cublasGemvT...         0.00%       0.000us         0.00%       0.000us       0.000us       2.000us         4.65%       2.000us       2.000us             1  
+void at::native::elementwise_kernel<128, 2, at::nati...         0.00%       0.000us         0.00%       0.000us       0.000us       1.000us         2.33%       1.000us       1.000us             1  
+                                                aten::t         0.31%       9.000us         0.51%      15.000us      15.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                        aten::transpose         0.17%       5.000us         0.20%       6.000us       6.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                       aten::as_strided         0.07%       2.000us         0.07%       2.000us       1.000us       0.000us         0.00%       0.000us       0.000us             2  
+                                           aten::expand         0.10%       3.000us         0.14%       4.000us       4.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                       cudaLaunchKernel         8.83%     260.000us         8.83%     260.000us      86.667us       0.000us         0.00%       0.000us       0.000us             3  
+cudaOccupancyMaxActiveBlocksPerMultiprocessorWithFla...         0.03%       1.000us         0.03%       1.000us       1.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                           aten::detach         0.07%       2.000us         0.14%       4.000us       4.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                                 detach         0.07%       2.000us         0.07%       2.000us       2.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                  cudaDeviceSynchronize         0.17%       5.000us         0.17%       5.000us       5.000us       0.000us         0.00%       0.000us       0.000us             1  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 2.943ms
+Self CUDA time total: 43.000us
+
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                        model_inference         0.00%       0.000us         0.00%       0.000us       0.000us      33.000us        86.84%      33.000us      33.000us             1  
+                                        model_inference        18.04%     136.000us        99.34%     749.000us     749.000us       0.000us         0.00%       5.000us       5.000us             1  
+                                           aten::linear         0.66%       5.000us        80.77%     609.000us     609.000us       0.000us         0.00%       5.000us       5.000us             1  
+                                            aten::addmm        44.03%     332.000us        78.12%     589.000us     589.000us       5.000us        13.16%       5.000us       5.000us             1  
+void dot_kernel<float, 128, 0, cublasDotParams<cubla...         0.00%       0.000us         0.00%       0.000us       0.000us       2.000us         5.26%       2.000us       2.000us             1  
+void reduce_1Block_kernel<float, 128, 7, cublasGemvT...         0.00%       0.000us         0.00%       0.000us       0.000us       2.000us         5.26%       2.000us       2.000us             1  
+void at::native::elementwise_kernel<128, 2, at::nati...         0.00%       0.000us         0.00%       0.000us       0.000us       1.000us         2.63%       1.000us       1.000us             1  
+                                                aten::t         1.19%       9.000us         1.99%      15.000us      15.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                        aten::transpose         0.66%       5.000us         0.80%       6.000us       6.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                       aten::as_strided         0.13%       1.000us         0.13%       1.000us       0.500us       0.000us         0.00%       0.000us       0.000us             2  
+                                           aten::expand         0.40%       3.000us         0.40%       3.000us       3.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                       cudaLaunchKernel        33.69%     254.000us        33.69%     254.000us      84.667us       0.000us         0.00%       0.000us       0.000us             3  
+                                           aten::detach         0.27%       2.000us         0.53%       4.000us       4.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                                 detach         0.27%       2.000us         0.27%       2.000us       2.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                  cudaDeviceSynchronize         0.66%       5.000us         0.66%       5.000us       5.000us       0.000us         0.00%       0.000us       0.000us             1  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 754.000us
+Self CUDA time total: 38.000us
+
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                        model_inference         0.00%       0.000us         0.00%       0.000us       0.000us      41.000us        89.13%      41.000us      41.000us             1  
+                                        model_inference        18.44%     156.000us        99.41%     841.000us     841.000us       0.000us         0.00%       5.000us       5.000us             1  
+                                           aten::linear         0.59%       5.000us        80.50%     681.000us     681.000us       0.000us         0.00%       5.000us       5.000us             1  
+                                            aten::addmm        46.81%     396.000us        78.13%     661.000us     661.000us       5.000us        10.87%       5.000us       5.000us             1  
+void dot_kernel<float, 128, 0, cublasDotParams<cubla...         0.00%       0.000us         0.00%       0.000us       0.000us       2.000us         4.35%       2.000us       2.000us             1  
+void reduce_1Block_kernel<float, 128, 7, cublasGemvT...         0.00%       0.000us         0.00%       0.000us       0.000us       2.000us         4.35%       2.000us       2.000us             1  
+void at::native::elementwise_kernel<128, 2, at::nati...         0.00%       0.000us         0.00%       0.000us       0.000us       1.000us         2.17%       1.000us       1.000us             1  
+                                                aten::t         1.06%       9.000us         1.77%      15.000us      15.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                        aten::transpose         0.59%       5.000us         0.71%       6.000us       6.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                       aten::as_strided         0.24%       2.000us         0.24%       2.000us       1.000us       0.000us         0.00%       0.000us       0.000us             2  
+                                           aten::expand         0.24%       2.000us         0.35%       3.000us       3.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                       cudaLaunchKernel        30.85%     261.000us        30.85%     261.000us      87.000us       0.000us         0.00%       0.000us       0.000us             3  
+cudaOccupancyMaxActiveBlocksPerMultiprocessorWithFla...         0.12%       1.000us         0.12%       1.000us       1.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                           aten::detach         0.24%       2.000us         0.47%       4.000us       4.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                                 detach         0.24%       2.000us         0.24%       2.000us       2.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                  cudaDeviceSynchronize         0.59%       5.000us         0.59%       5.000us       5.000us       0.000us         0.00%       0.000us       0.000us             1  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 846.000us
+Self CUDA time total: 46.000us
+
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                        model_inference         0.00%       0.000us         0.00%       0.000us       0.000us      32.000us        86.49%      32.000us      32.000us             1  
+                                        model_inference         5.22%     151.000us        99.83%       2.885ms       2.885ms       0.000us         0.00%       5.000us       5.000us             1  
+                                           aten::linear         0.21%       6.000us        94.46%       2.730ms       2.730ms       0.000us         0.00%       5.000us       5.000us             1  
+                                            aten::addmm        84.43%       2.440ms        93.46%       2.701ms       2.701ms       5.000us        13.51%       5.000us       5.000us             1  
+void dot_kernel<float, 128, 0, cublasDotParams<cubla...         0.00%       0.000us         0.00%       0.000us       0.000us       2.000us         5.41%       2.000us       2.000us             1  
+void reduce_1Block_kernel<float, 128, 7, cublasGemvT...         0.00%       0.000us         0.00%       0.000us       0.000us       2.000us         5.41%       2.000us       2.000us             1  
+void at::native::elementwise_kernel<128, 2, at::nati...         0.00%       0.000us         0.00%       0.000us       0.000us       1.000us         2.70%       1.000us       1.000us             1  
+                                                aten::t         0.59%      17.000us         0.80%      23.000us      23.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                        aten::transpose         0.17%       5.000us         0.21%       6.000us       6.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                       aten::as_strided         0.07%       2.000us         0.07%       2.000us       1.000us       0.000us         0.00%       0.000us       0.000us             2  
+                                           aten::expand         0.10%       3.000us         0.14%       4.000us       4.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                       cudaLaunchKernel         8.89%     257.000us         8.89%     257.000us      85.667us       0.000us         0.00%       0.000us       0.000us             3  
+                                           aten::detach         0.07%       2.000us         0.14%       4.000us       4.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                                 detach         0.07%       2.000us         0.07%       2.000us       2.000us       0.000us         0.00%       0.000us       0.000us             1  
+                                  cudaDeviceSynchronize         0.17%       5.000us         0.17%       5.000us       5.000us       0.000us         0.00%       0.000us       0.000us             1  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 2.890ms
+Self CUDA time total: 37.000us
+
+Prediction for test sample: 0.7564
