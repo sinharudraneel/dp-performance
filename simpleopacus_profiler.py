@@ -51,11 +51,10 @@ for epoch in range(num_epochs):
     running_loss = 0.0
     for inputs, targets in dataloader:
         outputs = None
-        with profile(activities=[
-            ProfilerActivity.CPU, ProfilerActivity.CUDA], record_shapes=True) as prof:
-            with record_function("model_inference"):
-                outputs = model(inputs)
-        print(prof.key_averages().table(sort_by="cuda_time_total", row_limit=100))
+        with profile(activities=[ProfilerActivity.CPU, ProfilerActivity.CUDA]) as prof:
+            outputs = model(inputs)
+
+        prof.export_chrome_trace("simpleopacus-trace.json")
         loss = criterion(outputs, targets)
 
         optimizer.zero_grad()
