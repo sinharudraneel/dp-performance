@@ -19,12 +19,12 @@ class SingleLayerNN(nn.Module):
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # Generate input data and target data
-X = torch.randn(100, 3).to(device)
-y = torch.randn(100, 1).to(device)
+X = torch.randn(100, 50).to(device)
+y = torch.randn(100, 3).to(device)
 
 # Set input size and output size
-input_size = 3
-output_size = 1
+input_size = 50
+output_size = 3
 
 # Create a TensorDataset and DataLoader
 dataset = TensorDataset(X, y)
@@ -54,7 +54,7 @@ for epoch in range(num_epochs):
         with profile(activities=[ProfilerActivity.CPU, ProfilerActivity.CUDA]) as prof:
             outputs = model(inputs)
 
-        prof.export_chrome_trace("simpleopacus-trace.json")
+        prof.export_chrome_trace("simpleopacus-trace2.json")
         loss = criterion(outputs, targets)
 
         optimizer.zero_grad()
@@ -69,6 +69,6 @@ for epoch in range(num_epochs):
 
 # Test the model with a new sample
 with torch.no_grad():
-    test_sample = torch.randn(1, 3).to(device)
+    test_sample = torch.randn(3, 50).to(device)
     prediction = model(test_sample)
-    print(f'Prediction for test sample: {prediction.item():.4f}')
+    print(f'Prediction for test sample: {prediction}')

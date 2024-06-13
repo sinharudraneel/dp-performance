@@ -43,10 +43,12 @@ for epoch in range(num_epochs):
     running_loss = 0.0
     for inputs, targets in dataloader:
         outputs = None
-        with profile(activities=[ProfilerActivity.CPU, ProfilerActivity.CUDA]) as prof:
-            outputs = model(inputs)
+        with profile(activities=[ProfilerActivity.CPU, ProfilerActivity.CUDA], record_shapes=True) as prof:
+            with record_function("model_inference"):
+               outputs =  model(inputs)
 
-        prof.export_chrome_trace("simpletorch-trace2.json")
+        print(prof.key_averages().table(sort_by="cuda_time_total", row_limit=100))
+
         loss = criterion(outputs, targets)
 
         optimizer.zero_grad()
