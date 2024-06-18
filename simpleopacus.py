@@ -44,7 +44,7 @@ model, optimizer, dataloader = privacy_engine.make_private(
 )
 
 # Train the model
-num_epochs = 100
+num_epochs = 1
 for epoch in range(num_epochs):
     running_loss = 0.0
     for inputs, targets in dataloader:
