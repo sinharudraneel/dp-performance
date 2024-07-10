@@ -12,7 +12,7 @@ torch::Tensor vector_add(torch::Tensor vecA, torch::Tensor vecB) {
     CHECK_INPUT(vecA);
     CHECK_INPUT(vecB);
 
-    return addVectors_cuda(vecA, vecB);
+    return vector_add_cuda(vecA, vecB);
 } 
 
 PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {

@@ -15,14 +15,14 @@ torch::Tensor vector_add_cuda (torch::Tensor a, torch::Tensor b) {
         throw std::runtime_error("Input tensors must have the same shape");
     }
 
-    auto c = torch::zeroes_like(a);
+    auto c = torch::zeros_like(a);
 
     const int64_t size = a.numel();
     const int threads = 256;
     const int blocks = (size + threads - 1) / threads;
 
     AT_DISPATCH_FLOATING_TYPES(a.type(), "add_vectors_cuda", ([&] {
-        add_vectors_kernel<scalar_t><<<blocks, threads>>>(
+        vector_add_kernel<scalar_t><<<blocks, threads>>>(
             a.data_ptr<scalar_t>(),
             b.data_ptr<scalar_t>(),
             c.data_ptr<scalar_t>(),
