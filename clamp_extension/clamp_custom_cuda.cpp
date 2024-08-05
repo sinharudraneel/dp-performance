@@ -17,8 +17,8 @@ torch::Tensor clamp_custom_cuda(
 
 torch::Tensor clamp_custom(
     torch::Tensor input,
-    torch::Scalar min_val, 
-    torch::Scalar max_val
+    double min_val, 
+    double max_val
     ) {
     TORCH_CHECK(input.is_cuda(), "Input tensor must be on GPU");
     at::cuda::CUDAGuard device_guard(input.device());

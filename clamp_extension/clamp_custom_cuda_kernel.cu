@@ -47,14 +47,14 @@ void launch_clamp_custom_kernel(
 
 torch::Tensor clamp_custom_cuda(
     torch::Tensor input,
-    torch::Scalar min_val,
-    torch::Scalar max_val
+    double min_val,
+    double max_val
 ) {
     auto output = torch::empty_like(input);
     auto sizes = input.sizes().vec();
     auto strides = input.strides().vec();
 
-    AT_DISPATCH_FLOATING_TYPES_AND_HALF(input.scalar_type(), "clamp_custom_cuda", ([&] {
+    AT_DISPATCH_ALL_TYPES_AND(at::ScalarType::Half, input.scalar_type(), "clamp_custom_cuda", ([&] {
         launch_clamp_custom_kernel<scalar_t>(
             input.data_ptr<scalar_t>(),
             output.data_ptr<scalar_t>(),
@@ -62,8 +62,8 @@ torch::Tensor clamp_custom_cuda(
             strides.data(),
             input.numel(),
             input.dim(),
-            min_val.to<scalar_t>(),
-            max_val.to<scalar_t>()
+            static_cast<scalar_t>(min_val),
+            static_cast<scalar_t>(max_val)
         );
     }));
     return output;
