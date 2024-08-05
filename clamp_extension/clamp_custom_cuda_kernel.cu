@@ -43,6 +43,11 @@ void launch_clamp_custom_kernel(
     
     clamp_custom_kernel<<<blocks, threads>>>(
         input, output, sizes, strides, numel, ndim, min_val, max_val);
+    
+    cudaError_t err = cudaGetLastError();
+    if (err != cudaSuccess) {
+    	throw std::runtime_error(cudaGetErrorString(err));
+    }
 }
 
 torch::Tensor clamp_custom_cuda(
@@ -54,7 +59,7 @@ torch::Tensor clamp_custom_cuda(
     auto sizes = input.sizes().vec();
     auto strides = input.strides().vec();
 
-    AT_DISPATCH_ALL_TYPES_AND(at::ScalarType::Half, input.scalar_type(), "clamp_custom_cuda", ([&] {
+    AT_DISPATCH_FLOATING_TYPES_AND_HALF(input.scalar_type(), "clamp_custom_cuda", ([&] {
         launch_clamp_custom_kernel<scalar_t>(
             input.data_ptr<scalar_t>(),
             output.data_ptr<scalar_t>(),

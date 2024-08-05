@@ -6,8 +6,8 @@
 
 torch::Tensor clamp_custom_cuda(
     torch::Tensor input, 
-    torch::Scalar min_val, 
-    torch::Scalar max_val
+    double min_val, 
+    double max_val
     );
 
 #define CHECK_CUDA(x) TORCH_CHECK(x.device().is_cuda(), #x " must be a CUDA tensor")
