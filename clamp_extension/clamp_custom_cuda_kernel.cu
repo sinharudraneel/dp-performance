@@ -1,6 +1,7 @@
 #include <cuda.h>
 #include <cuda_runtime.h>
 #include <torch/extension.h>
+#include <vector>
 
 template <typename scalar_t>
 __global__ void clamp_custom_kernel(
@@ -13,6 +14,10 @@ __global__ void clamp_custom_kernel(
     scalar_t min_val,
     scalar_t max_val
 ) {
+    //if (threadIdx.x == 0 && blockIdx.x == 0) {
+    //	printf("ndim: %lld\n", ndim);
+    //	printf("")
+    //}
     const int64_t index = blockIdx.x * blockDim.x + threadIdx.x;
     if (index < numel) {
         int64_t input_index = 0;
@@ -40,9 +45,28 @@ void launch_clamp_custom_kernel(
 ) {
     const int threads = 1024;
     const int blocks = (numel + threads - 1) / threads;
+
+    int64_t *d_sizes, *d_strides;
+    cudaMalloc(&d_sizes, ndim * sizeof(int64_t));
+    cudaMalloc(&d_strides, ndim * sizeof(int64_t));
+    cudaMemcpy(d_sizes, sizes, ndim * sizeof(int64_t), cudaMemcpyHostToDevice);
+    cudaMemcpy(d_strides, strides, ndim * sizeof(int64_t), cudaMemcpyHostToDevice);
+
+    //std::vector<int64_t> h_sizes(ndim), h_strides(ndim);
+    //cudaMemcpy(h_sizes.data(), d_sizes, ndim * sizeof(int64_t), cudaMemcpyDeviceToHost);
+    //cudaMemcpy(h_strides.data(), d_strides, ndim * sizeof(int64_t), cudaMemcpyDeviceToHost);
     
+    //std::cout << "Sizes and strides on GPU:" << std::endl;
+    //for (int i = 0; i < ndim; ++i) {
+    //    std::cout << "sizes[" << i << "]: " << h_sizes[i] 
+    //              << ", strides[" << i << "]: " << h_strides[i] << std::endl;
+    //}
+
     clamp_custom_kernel<<<blocks, threads>>>(
-        input, output, sizes, strides, numel, ndim, min_val, max_val);
+        input, output, d_sizes, d_strides, numel, ndim, min_val, max_val);
+
+    cudaFree(d_sizes);
+    cudaFree(d_strides);
     
     cudaError_t err = cudaGetLastError();
     if (err != cudaSuccess) {
@@ -56,8 +80,8 @@ torch::Tensor clamp_custom_cuda(
     double max_val
 ) {
     auto output = torch::empty_like(input);
-    auto sizes = input.sizes();
-    auto strides = input.strides();
+    auto sizes = input.sizes().vec();
+    auto strides = input.strides().vec();
 
     AT_DISPATCH_FLOATING_TYPES_AND_HALF(input.scalar_type(), "clamp_custom_cuda", ([&] {
         launch_clamp_custom_kernel<scalar_t>(
