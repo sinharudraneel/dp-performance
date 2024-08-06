@@ -56,8 +56,8 @@ torch::Tensor clamp_custom_cuda(
     double max_val
 ) {
     auto output = torch::empty_like(input);
-    auto sizes = input.sizes().vec();
-    auto strides = input.strides().vec();
+    auto sizes = input.sizes();
+    auto strides = input.strides();
 
     AT_DISPATCH_FLOATING_TYPES_AND_HALF(input.scalar_type(), "clamp_custom_cuda", ([&] {
         launch_clamp_custom_kernel<scalar_t>(
