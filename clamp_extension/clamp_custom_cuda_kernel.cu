@@ -83,6 +83,13 @@ torch::Tensor clamp_custom_cuda(
     auto sizes = input.sizes().vec();
     auto strides = input.strides().vec();
 
+    if (input.numel() == 0) {
+    	return input;
+    }
+    if (min_val > max_val) {
+    	throw std::runtime_error("min/max values are invalid (min greater than max)");
+    }
+
     AT_DISPATCH_FLOATING_TYPES_AND_HALF(input.scalar_type(), "clamp_custom_cuda", ([&] {
         launch_clamp_custom_kernel<scalar_t>(
             input.data_ptr<scalar_t>(),
