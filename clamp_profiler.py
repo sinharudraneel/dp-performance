@@ -22,7 +22,7 @@ n_start_gpu.record()
 for i in range(100):
     torch.clamp(tensor, min_val, max_val)
 n_end_gpu.record()
-torch.cuda.synchronise()
+torch.cuda.synchronize()
 n_gpu_time = n_start_gpu.elapsed_time(n_end_gpu) / 100
 
 #custom:
@@ -37,10 +37,12 @@ c_start_gpu.record()
 for i in range(100):
     clamp_custom_cuda.clamp_custom(tensor, min_val, max_val)
 c_end_gpu.record()
-torch.cuda.synchronise()
+torch.cuda.synchronize()
 c_gpu_time = c_start_gpu.elapsed_time(c_end_gpu) / 100
 
-equality = torch.allclose(n_result, c_result)
+c_cpu_result = c_result.cpu()
+
+equality = torch.allclose(n_result, c_cpu_result)
 
 print(f"Original tensor shape: {tensor.shape}")
 print(f"Results are equal: {equality}")
