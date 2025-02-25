@@ -12,7 +12,7 @@ int main() {
 	try {
 		torch::Device device(torch::kCUDA, 0);
 
-		auto input = torch::rand({4096, 4096}
+		auto input = torch::rand({4096, 4096},
 			torch::TensorOptions()
 				.device(device)
 				.requires_grad(false));
